@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Salary Calculator</title>
+  <title>జ్యోతిప్రకాశ్ జీత గణన</title>
   <style>
-    * {
+     * {
       box-sizing: border-box;
     }
 
@@ -120,58 +120,49 @@
 <body>
 
 <div class="container">
-  <h1>Jyothi Prakash's Salary Calculator</h1>
+  <h1>జ్యోతిప్రకాశ్ జీత గణన</h1>
 
-  <label for="month">Month Name:</label>
+  <label for="month">నెల పేరు:</label>
   <select id="month" onchange="handleMonthChange()">
-    <option value="">-- Select --</option>
-    <option value="january">January</option>
-    <option value="february">February</option>
-    <option value="march">March</option>
-    <option value="april">April</option>
-    <option value="may">May</option>
-    <option value="june">June</option>
-    <option value="july">July</option>
-    <option value="august">August</option>
-    <option value="september">September</option>
-    <option value="october">October</option>
-    <option value="november">November</option>
-    <option value="december">December</option>
+    <option value="">-- ఎంచుకోండి --</option>
+    <option value="january">జనవరి</option>
+    <option value="february">ఫిబ్రవరి</option>
+    <option value="march">మార్చి</option>
+    <option value="april">ఏప్రిల్</option>
+    <option value="may">మే</option>
+    <option value="june">జూన్</option>
+    <option value="july">జులై</option>
+    <option value="august">ఆగస్ట్</option>
+    <option value="september">సెప్టెంబర్</option>
+    <option value="october">అక్టోబర్</option>
+    <option value="november">నవంబర్</option>
+    <option value="december">డిసెంబర్</option>
   </select>
 
   <div id="worked31-container" style="display: none;">
-    <label for="worked31">Did the worker work on the 31st?</label>
+    <label for="worked31">జ్యోతిప్రకాశ్ 31వ తేదీన పనిచేశాడా?</label>
     <select id="worked31">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
+      <option value="no">కాదు</option>
+      <option value="yes">అవును</option>
     </select>
   </div>
 
-  <label for="daysWorked">Number of working days (excluding holidays):</label>
-  <input type="number" id="daysWorked" min="0" placeholder="e.g. 22" />
+  <label for="daysWorked">పనిచేసిన రోజుల సంఖ్య (హాలిడేలు మినహా):</label>
+  <input type="number" id="daysWorked" min="0" placeholder="ఉదా: 22" />
 
-  <label for="prepaidSalary">Enter total prepaid salary amount taken:</label>
-  <input type="number" id="prepaidSalary" min="0" step="any" placeholder="e.g. 3000" />
+  <label for="prepaidSalary">ముందుగా తీసుకున్న జీత మొత్తం:</label>
+  <input type="number" id="prepaidSalary" min="0" step="any" placeholder="ఉదా: 3000" />
 
-  <button onclick="calculateSalary()">Calculate Salary</button>
+  <button onclick="calculateSalary()">జీతం లెక్కించండి</button>
 
   <div class="result" id="result" style="display: none;"></div>
 </div>
 
 <script>
   const monthDays = {
-    january: 31,
-    february: 28,
-    march: 31,
-    april: 30,
-    may: 31,
-    june: 30,
-    july: 31,
-    august: 31,
-    september: 30,
-    october: 31,
-    november: 30,
-    december: 31
+    january: 31, february: 28, march: 31, april: 30,
+    may: 31, june: 30, july: 31, august: 31,
+    september: 30, october: 31, november: 30, december: 31
   };
 
   function handleMonthChange() {
@@ -212,21 +203,21 @@
     const prepaidSalaryInput = document.getElementById("prepaidSalary").value;
 
     if (!month) {
-      alert("Please select the month.");
+      alert("దయచేసి నెలను ఎంచుకోండి.");
       return;
     }
 
     const maxDays = monthDays[month];
 
     if (!daysWorkedInput || isNaN(daysWorkedInput) || daysWorkedInput < 0 || daysWorkedInput > maxDays) {
-      alert(`Please enter a valid number of working days (0-${maxDays}).`);
+      alert(`దయచేసి సరైన పనిదినాల సంఖ్య నమోదు చేయండి (0-${maxDays} మధ్యలో).`);
       return;
     }
 
     const daysWorked = parseInt(daysWorkedInput);
 
     if (!prepaidSalaryInput || isNaN(prepaidSalaryInput) || prepaidSalaryInput < 0) {
-      alert("Please enter a valid prepaid salary amount.");
+      alert("దయచేసి చెల్లించిన మొత్తాన్ని సరైన రీతిలో నమోదు చేయండి.");
       return;
     }
 
@@ -248,14 +239,24 @@
     const resultDiv = document.getElementById("result");
     resultDiv.style.display = "block";
     resultDiv.innerHTML = `
-      <h3>Salary Report - ${month.charAt(0).toUpperCase() + month.slice(1)}</h3>
-      <p><strong>Working days:</strong> ${daysWorked}</p>
-      <p><strong>Paid holidays given:</strong> ${paidHolidays}</p>
-      <p><strong>Total paid days:</strong> ${totalPaidDays}</p>
-      <p><strong>Earned salary:</strong> ₹${earnedSalary.toFixed(2)}</p>
-      <p><strong>Prepaid salary taken:</strong> ₹${prepaidSalary.toFixed(2)}</p>
-      <p><strong>Remaining salary to pay:</strong> ₹${remainingSalary.toFixed(2)}</p>
+      <h3>జీత వివరాలు - ${translateMonth(month)}</h3>
+      <p><strong>పనిచేసిన రోజులు:</strong> ${daysWorked}</p>
+      <p><strong>అందించిన సెలవులు:</strong> ${paidHolidays}</p>
+      <p><strong>మొత్తం జీతం పొందిన రోజులు:</strong> ${totalPaidDays}</p>
+      <p><strong>ఆర్జిత జీతం:</strong> ₹${earnedSalary.toFixed(2)}</p>
+      <p><strong>ముందుగా తీసుకున్న జీతం:</strong> ₹${prepaidSalary.toFixed(2)}</p>
+      <p><strong>చెల్లించాల్సిన మిగిలిన జీతం:</strong> ₹${remainingSalary.toFixed(2)}</p>
     `;
+  }
+
+  function translateMonth(month) {
+    const monthsTelugu = {
+      january: "జనవరి", february: "ఫిబ్రవరి", march: "మార్చి",
+      april: "ఏప్రిల్", may: "మే", june: "జూన్",
+      july: "జులై", august: "ఆగస్ట్", september: "సెప్టెంబర్",
+      october: "అక్టోబర్", november: "నవంబర్", december: "డిసెంబర్"
+    };
+    return monthsTelugu[month] || month;
   }
 </script>
 
